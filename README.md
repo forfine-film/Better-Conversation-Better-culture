@@ -243,7 +243,7 @@
                 <span class="text-xl">✨</span>
             </button>
             
-            <!-- Change API Key -->
+            <!-- Change API Key - Hidden since key is embedded -->
             <div id="changeKeyBtn" class="mt-3 text-center hidden">
                 <button onclick="showApiModal()" class="text-sm text-slate-400 hover:text-blue-500 underline">
                     🔑 เปลี่ยน API Key
@@ -368,7 +368,7 @@
 
     <script>
         // State
-        let apiKey = localStorage.getItem('gemini_api_key') || '';
+        let apiKey = 'AIzaSyAnM_3MAapCER7LVmtqY-LgfZYYIVeaiIY';
         let isExpanded = true;
         
         // Show change key button if key exists
