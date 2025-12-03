@@ -2,209 +2,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Better Conversations, Better Culture - โหมดสาธิต (ใช้งานได้ทันที)</title>
+    <title>Better Conversations, Better Culture</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#1D4ED8',
-                        'secondary-blue': '#3B82F6',
-                        'accent-sky': '#93C5FD',
-                        'white-bg': '#F9FAFB',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            font-family: 'Sukhumvit Set', 'Kanit', sans-serif;
+            font-family: 'Noto Sans Thai', sans-serif;
         }
-        .whitespace-pre-line {
-            white-space: pre-line;
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-gradient {
+            background-size: 200% auto;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.25rem;
         }
     </style>
 </head>
-<body class="bg-white-bg">
-
-    <div id="root"></div>
-
-    <script type="text/babel">
-        const { useState, useCallback } = React;
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    
+    <div class="max-w-3xl mx-auto px-4 py-8">
         
-        // Enum Definitions
-        const SchoolRole = {
-            HIGH_EXECUTIVE: 'ผู้บริหารระดับสูง', PEER_EXECUTIVE: 'ผู้บริหารระดับเดียวกัน', SENIOR_TEACHER: 'หัวหน้างาน/ครูอาวุโส', TEACHER: 'ครู', PARENT: 'ผู้ปกครอง', STUDENT: 'นักเรียน', EVERYONE: 'ทุกคนในองค์กร',
-        };
-        const Purpose = {
-            GIVE_FEEDBACK: 'ให้ข้อเสนอแนะที่สร้างสรรค์', RESOLVE_CONFLICT: 'ไกล่เกลี่ย/แก้ปัญหาความขัดแย้ง', SHARE_VISION: 'ถ่ายทอดวิสัยทัศน์/เป้าหมาย', ASK_FOR_HELP: 'ขอความช่วยเหลือ/การสนับสนุน', MOTIVATE: 'ให้กำลังใจ/สร้างแรงจูงใจ', ANNOUNCE_CHANGE: 'แจ้งการเปลี่ยนแปลง/นโยบายใหม่',
-        };
-        const Tone = {
-            FORMAL_WRITTEN: 'ภาษาเขียน (เป็นทางการ)', SEMI_FORMAL_SPOKEN: 'ภาษาสื่อสาร (กึ่งทางการ)', CASUAL_SPOKEN: 'ภาษาพูด (กันเอง)',
-        };
-        const Format = {
-            FACE_TO_FACE: 'พูดคุยต่อหน้า', EMAIL: 'อีเมล/ข้อความ', MEETING: 'การประชุมกลุ่ม',
-        };
-        
-        // 🛑🛑🛑 ฟังก์ชันโหมดสาธิต: ไม่ใช้ API Key, ส่งกลับ Mock Data 🛑🛑🛑
-        const generateCommunicationGuide = async (sender, receiver, purpose, tone, format) => {
-            // จำลองการโหลด 1.5 วินาที
-            await new Promise(resolve => setTimeout(resolve, 1500));
+        <!-- Header -->
+        <header class="text-center py-8 mb-8">
+            <div class="relative">
+                <h1 class="text-4xl md:text-5xl font-black mb-3 tracking-tight">
+                    <span class="bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-600 bg-clip-text text-transparent animate-gradient">
+                        Better Conversations
+                    </span>
+                </h1>
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="h-0.5 w-12 bg-gradient-to-r from-transparent to-blue-400 rounded-full"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
+                        Better Culture
+                    </h2>
+                    <div class="h-0.5 w-12 bg-gradient-to-l from-transparent to-indigo-400 rounded-full"></div>
+                </div>
+            </div>
+            
+            <div class="relative inline-block">
+                <div class="absolute -left-6 top-1/2 -translate-y-1/2 text-blue-300 text-2xl">✦</div>
+                <div class="absolute -right-6 top-1/2 -translate-y-1/2 text-indigo-300 text-2xl">✦</div>
+                <p class="text-lg md:text-xl text-slate-600 font-medium px-8 py-3 bg-gradient-to-r from-blue-50 via-white to-indigo-50 rounded-full border border-blue-100 shadow-sm">
+                    พื้นที่ปลอดภัยในการสื่อสาร วัฒนธรรมองค์กรที่แข็งแรง
+                </p>
+            </div>
+            
+            <div class="mt-5 inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur rounded-full border border-blue-100 shadow-lg">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="text-sm text-slate-500 font-medium">A supportive space for ideas and voices</span>
+                <span class="text-blue-400">💬</span>
+            </div>
+        </header>
 
-            // ข้อมูลตัวอย่างที่ถูกกำหนดไว้ล่วงหน้า
-            return {
-                strategy: "หลักการสื่อสารในสถานการณ์นี้คือ **การรับฟังอย่างลึกซึ้ง (Active Listening)** ตามด้วย **การสะท้อนความรู้สึก (Validation)** ก่อนที่จะนำเสนอแนวทางแก้ไขที่เน้นการเติบโตร่วมกัน (Growth-Oriented Solution)",
-                script: "คุณ A: 'สวัสดีค่ะ/ครับ ฉันเห็นความตั้งใจในการทำงานของคุณ A มาตลอดนะ (แสดงความจริงใจ) ฉันอยากจะมาให้กำลังใจและคุยกันเรื่อง [หัวข้อ] สักหน่อย\n\n(ส่วนเนื้อหา) เพื่อให้งานของเราสำเร็จไปได้ด้วยดีมากขึ้น ฉันอยากจะลองเสนอแนวทางให้เราเพิ่ม [ขั้นตอน/เครื่องมือ] เข้าไปในกระบวนการทำงานของเราดูนะคะ\n\n(ส่วนปิดท้าย) ฉันพร้อมที่จะช่วยเหลือเต็มที่เลยนะ ถ้าติดขัดอะไรหรือต้องการคำแนะนำเพิ่มเติม อย่าลังเลที่จะส่งข้อความมาหาฉันได้ตลอดเลยนะ! 😊'",
-                example: "ผอ.: 'อรุณสวัสดิ์ครับคุณครู B ผมขอเวลานอกห้องเรียน 5 นาทีได้ไหมครับ (ถามอย่างสุภาพ)\n\nครู B: 'ได้เลยค่ะท่าน'\n\nผอ.: 'ผมทราบว่าการประเมินโครงการวิจัยในครั้งนี้เป็นงานหนัก แต่ผมเห็นชัดเลยว่าคุณครูทุ่มเทมากจริงๆ (ชมเชยความพยายาม)\n\nครู B: 'ขอบคุณค่ะ'\n\nผอ.: 'มีข้อเสนอแนะเล็กน้อยครับ เพื่อให้การส่งรายงานครั้งหน้าเป็นไปอย่างราบรื่น ลองเพิ่มส่วนการสรุปผลเชิงตัวเลข (Data-Driven Summary) เข้าไปในบทนำดูสิครับ มันจะช่วยให้ผู้บริหารท่านอื่นเห็นภาพรวมได้เร็วขึ้นมาก'\n\nครู B: 'เป็นความคิดที่ดีค่ะ!'\n\nผอ.: 'ผมมั่นใจว่าคุณครูทำได้แน่นอนครับ ถ้ามีปัญหาเรื่องสถิติ มาคุยกับทีม ICT ได้เลยนะครับ! 💪'",
-                tips: [
-                    "รักษาระดับสายตาเมื่อพูดคุยต่อหน้า และใช้ภาษากายที่เปิดเผย (Open Body Language) เพื่อสร้างความสบายใจ",
-                    "ตั้งคำถามปลายเปิด (Open-Ended Questions) เช่น 'คุณคิดว่าเราจะแก้ปัญหานี้ได้อย่างไร?' แทนการบอกวิธีแก้ปัญหาโดยตรง",
-                    "กำหนดเวลาและสถานที่ที่เหมาะสมในการสื่อสาร โดยเฉพาะการให้ข้อเสนอแนะที่สร้างสรรค์ ควรทำในพื้นที่ส่วนตัว"
-                ]
-            };
-        };
+        <!-- API Key Modal -->
+        <div id="apiKeyModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 hidden">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 fade-in">
+                <h3 class="text-xl font-bold text-blue-600 mb-4">🔑 ใส่ Gemini API Key</h3>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4 rounded-r-lg">
+                    <p class="text-sm text-blue-800">
+                        <strong>วิธีรับ API Key ฟรี:</strong><br>
+                        1. ไปที่ <a href="https://aistudio.google.com/apikey" target="_blank" class="underline font-semibold">Google AI Studio</a><br>
+                        2. คลิก "Create API Key"<br>
+                        3. คัดลอก Key มาวางที่นี่
+                    </p>
+                </div>
 
-        // InputForm, ResultCard Components (ไม่เปลี่ยนแปลงจากฉบับก่อนหน้า)
-        const SelectGroup = ({ label, value, onChange, options }) => (
-            <div className="w-full">
-                <label className="block text-primary-blue text-sm font-semibold mb-2">{label}</label>
-                <div className="relative">
-                    <select value={value} onChange={(e) => onChange(e.target.value)} className="block appearance-none w-full bg-white border border-accent-sky hover:border-secondary-blue px-4 py-2 pr-8 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary-blue focus:border-transparent transition duration-150 ease-in-out text-gray-700 cursor-pointer">
-                        {Object.values(options).map((option) => (<option key={option} value={option}>{option}</option>))}
+                <input
+                    type="password"
+                    id="apiKeyInput"
+                    placeholder="AIzaSy..."
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none mb-4 font-mono text-sm"
+                >
+                
+                <label class="flex items-center gap-2 mb-4 cursor-pointer">
+                    <input type="checkbox" id="saveKeyCheckbox" class="w-4 h-4 text-blue-600 rounded">
+                    <span class="text-sm text-gray-600">จดจำ API Key ไว้ในเครื่องนี้</span>
+                </label>
+
+                <div class="flex gap-3">
+                    <button onclick="closeApiModal()" class="flex-1 py-2 px-4 border-2 border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition">
+                        ยกเลิก
+                    </button>
+                    <button onclick="submitApiKey()" class="flex-1 py-2 px-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="bg-white rounded-2xl shadow-xl border border-blue-100 p-6 mb-6">
+            
+            <!-- Topic Input -->
+            <div class="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100">
+                <label class="block text-sm font-semibold mb-2 text-slate-600">
+                    <span class="mr-2">📝</span>
+                    เรื่องที่ต้องการสื่อสาร
+                </label>
+                <textarea
+                    id="topic"
+                    placeholder="เช่น นักเรียนมาสาย, การบ้านไม่ส่ง, ขอเลื่อนประชุม, ขอบคุณที่ช่วยงาน..."
+                    rows="3"
+                    class="block w-full bg-white border-2 border-blue-100 px-4 py-3 rounded-xl text-slate-700 resize-none transition-all duration-300 hover:border-blue-300 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 placeholder:text-slate-400"
+                ></textarea>
+            </div>
+
+            <!-- Selects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-600">
+                        <span class="mr-2">👤</span>ฉันคือใคร
+                    </label>
+                    <select id="sender" class="block w-full bg-white border-2 border-blue-100 px-4 py-3 pr-12 rounded-xl text-slate-700 font-medium cursor-pointer transition-all duration-300 hover:border-blue-300 hover:shadow-lg focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 appearance-none">
+                        <option value="ผู้บริหารระดับสูง">ผู้บริหารระดับสูง</option>
+                        <option value="ผู้บริหารระดับเดียวกัน">ผู้บริหารระดับเดียวกัน</option>
+                        <option value="หัวหน้างาน/ครูอาวุโส">หัวหน้างาน/ครูอาวุโส</option>
+                        <option value="ครู" selected>ครู</option>
+                        <option value="บุคลากรสนับสนุน">บุคลากรสนับสนุน</option>
+                        <option value="ผู้ปกครอง">ผู้ปกครอง</option>
+                        <option value="นักเรียน">นักเรียน</option>
+                        <option value="ทุกคนในองค์กร">ทุกคนในองค์กร</option>
+                        <option value="แขกผู้มีเกียรติ">แขกผู้มีเกียรติ</option>
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-primary-blue">
-                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-600">
+                        <span class="mr-2">👥</span>สื่อสารกับใคร
+                    </label>
+                    <select id="receiver" class="block w-full bg-white border-2 border-blue-100 px-4 py-3 pr-12 rounded-xl text-slate-700 font-medium cursor-pointer transition-all duration-300 hover:border-blue-300 hover:shadow-lg focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 appearance-none">
+                        <option value="ผู้บริหารระดับสูง">ผู้บริหารระดับสูง</option>
+                        <option value="ผู้บริหารระดับเดียวกัน">ผู้บริหารระดับเดียวกัน</option>
+                        <option value="หัวหน้างาน/ครูอาวุโส">หัวหน้างาน/ครูอาวุโส</option>
+                        <option value="ครู">ครู</option>
+                        <option value="บุคลากรสนับสนุน">บุคลากรสนับสนุน</option>
+                        <option value="ผู้ปกครอง">ผู้ปกครอง</option>
+                        <option value="นักเรียน" selected>นักเรียน</option>
+                        <option value="ทุกคนในองค์กร">ทุกคนในองค์กร</option>
+                        <option value="แขกผู้มีเกียรติ">แขกผู้มีเกียรติ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-semibold mb-2 text-slate-600">
+                    <span class="mr-2">🎯</span>วัตถุประสงค์
+                </label>
+                <select id="purpose" class="block w-full bg-white border-2 border-blue-100 px-4 py-3 pr-12 rounded-xl text-slate-700 font-medium cursor-pointer transition-all duration-300 hover:border-blue-300 hover:shadow-lg focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 appearance-none">
+                    <option value="ให้ข้อเสนอแนะที่สร้างสรรค์">ให้ข้อเสนอแนะที่สร้างสรรค์</option>
+                    <option value="ไกล่เกลี่ย/แก้ปัญหาความขัดแย้ง">ไกล่เกลี่ย/แก้ปัญหาความขัดแย้ง</option>
+                    <option value="ถ่ายทอดวิสัยทัศน์/เป้าหมาย">ถ่ายทอดวิสัยทัศน์/เป้าหมาย</option>
+                    <option value="ขอความช่วยเหลือ/การสนับสนุน">ขอความช่วยเหลือ/การสนับสนุน</option>
+                    <option value="ให้กำลังใจ/สร้างแรงจูงใจ" selected>ให้กำลังใจ/สร้างแรงจูงใจ</option>
+                    <option value="แจ้งการเปลี่ยนแปลง/นโยบายใหม่">แจ้งการเปลี่ยนแปลง/นโยบายใหม่</option>
+                    <option value="ชื่นชม/ขอบคุณ">ชื่นชม/ขอบคุณ</option>
+                    <option value="มอบหมายงาน">มอบหมายงาน</option>
+                    <option value="ให้คำปรึกษา/โค้ช">ให้คำปรึกษา/โค้ช</option>
+                    <option value="รายงานปัญหา/ข้อกังวล">รายงานปัญหา/ข้อกังวล</option>
+                    <option value="🎤 กล่าวเปิดงาน">🎤 กล่าวเปิดงาน</option>
+                    <option value="🎬 กล่าวปิดงาน">🎬 กล่าวปิดงาน</option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-600">
+                        <span class="mr-2">💬</span>โทนภาษา
+                    </label>
+                    <select id="tone" class="block w-full bg-white border-2 border-blue-100 px-4 py-3 pr-12 rounded-xl text-slate-700 font-medium cursor-pointer transition-all duration-300 hover:border-blue-300 hover:shadow-lg focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 appearance-none">
+                        <option value="ภาษาเขียน (เป็นทางการ)">ภาษาเขียน (เป็นทางการ)</option>
+                        <option value="ภาษาสื่อสาร (กึ่งทางการ)" selected>ภาษาสื่อสาร (กึ่งทางการ)</option>
+                        <option value="ภาษาพูด (กันเอง)">ภาษาพูด (กันเอง)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-600">
+                        <span class="mr-2">📱</span>ช่องทาง
+                    </label>
+                    <select id="format" class="block w-full bg-white border-2 border-blue-100 px-4 py-3 pr-12 rounded-xl text-slate-700 font-medium cursor-pointer transition-all duration-300 hover:border-blue-300 hover:shadow-lg focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 appearance-none">
+                        <option value="พูดคุยต่อหน้า" selected>พูดคุยต่อหน้า</option>
+                        <option value="อีเมล/ข้อความ">อีเมล/ข้อความ</option>
+                        <option value="การประชุมกลุ่ม">การประชุมกลุ่ม</option>
+                        <option value="แชท LINE/Messenger">แชท LINE/Messenger</option>
+                        <option value="โทรศัพท์">โทรศัพท์</option>
+                        <option value="🎙️ บนเวที/หน้าชุมชน">🎙️ บนเวที/หน้าชุมชน</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+                id="generateBtn"
+                onclick="handleGenerate()"
+                class="w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 flex justify-center items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300 hover:scale-[1.02] active:scale-[0.98]"
+            >
+                <span>สร้างแนวทางการสื่อสาร</span>
+                <span class="text-xl">✨</span>
+            </button>
+            
+            <!-- Change API Key -->
+            <div id="changeKeyBtn" class="mt-3 text-center hidden">
+                <button onclick="showApiModal()" class="text-sm text-slate-400 hover:text-blue-500 underline">
+                    🔑 เปลี่ยน API Key
+                </button>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div id="errorBox" class="mb-6 p-5 bg-rose-50 border-2 border-rose-200 rounded-xl fade-in hidden">
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">🚨</span>
+                <div>
+                    <p class="font-bold text-rose-800">เกิดข้อผิดพลาด</p>
+                    <p id="errorMessage" class="mt-1 text-rose-700 text-sm"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div id="resultCard" class="mt-8 fade-in hidden">
+            <div class="bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <span class="text-2xl">💡</span>
+                            แนวทางการสื่อสารที่แนะนำ
+                        </h2>
+                        <button
+                            onclick="toggleResult()"
+                            id="toggleBtn"
+                            class="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-full text-white text-sm font-semibold transition-all duration-300"
+                        >
+                            ย่อ ▲
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="resultContent" class="p-6">
+                    <!-- Strategy -->
+                    <div class="group mb-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center text-white text-sm shadow-md">🧠</span>
+                                <span>แนวคิด/หลักการ</span>
+                            </h3>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-md group-hover:border-blue-100">
+                            <p id="strategyText" class="text-slate-700 leading-relaxed whitespace-pre-line"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Script -->
+                    <div class="group mb-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm shadow-md">💬</span>
+                                <span>คำพูด/ข้อความที่แนะนำ</span>
+                            </h3>
+                            <button onclick="copyText('scriptText')" class="px-3 py-1.5 text-xs font-semibold rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-all duration-300">
+                                📋 คัดลอก
+                            </button>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-md group-hover:border-blue-100">
+                            <p id="scriptText" class="text-slate-800 leading-relaxed whitespace-pre-line text-base font-medium"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Example -->
+                    <div class="group mb-5">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-white text-sm shadow-md">🎭</span>
+                                <span>ตัวอย่างบทสนทนา/สถานการณ์</span>
+                            </h3>
+                            <button onclick="copyText('exampleText')" class="px-3 py-1.5 text-xs font-semibold rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-all duration-300">
+                                📋 คัดลอก
+                            </button>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-md group-hover:border-blue-100">
+                            <p id="exampleText" class="text-slate-700 leading-relaxed whitespace-pre-line italic"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tips & Donts -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Tips -->
+                        <div class="group mb-5">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                    <span class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white text-sm shadow-md">✅</span>
+                                    <span>เคล็ดลับ</span>
+                                </h3>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-md group-hover:border-blue-100">
+                                <ul id="tipsList" class="space-y-2"></ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Donts -->
+                        <div class="group mb-5">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                                    <span class="w-8 h-8 rounded-lg bg-rose-500 flex items-center justify-center text-white text-sm shadow-md">⚠️</span>
+                                    <span>สิ่งที่ควรหลีกเลี่ยง</span>
+                                </h3>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 transition-all duration-300 group-hover:bg-white group-hover:shadow-md group-hover:border-blue-100">
+                                <ul id="dontsList" class="space-y-2"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        );
+        </div>
 
-        const InputForm = ({ onGenerate, isLoading }) => { 
-            const [sender, setSender] = useState(SchoolRole.TEACHER);
-            const [receiver, setReceiver] = useState(SchoolRole.STUDENT);
-            const [purpose, setPurpose] = useState(Purpose.MOTIVATE);
-            const [tone, setTone] = useState(Tone.SEMI_FORMAL_SPOKEN);
-            const [format, setFormat] = useState(Format.FACE_TO_FACE);
+        <!-- Footer -->
+        <footer class="mt-10 text-center text-slate-400 text-sm pb-6">
+            <p>พัฒนาเพื่อส่งเสริมการสื่อสารที่สร้างสรรค์ในโรงเรียน 💙</p>
+            <p class="mt-1 text-xs">Powered by Gemini AI</p>
+        </footer>
+    </div>
 
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                onGenerate({ sender, receiver, purpose, tone, format });
-            };
-
-            return (
-                <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0"><SelectGroup label="ฉันคือใคร (ผู้ส่ง)" value={sender} onChange={setSender} options={SchoolRole} /></div>
-                        <div className="w-full md:w-1/2 px-3"><SelectGroup label="ต้องการสื่อสารกับใคร (ผู้รับ)" value={receiver} onChange={setReceiver} options={SchoolRole} /></div>
-                    </div>
-                    <div className="w-full"><SelectGroup label="วัตถุประสงค์ในการสื่อสาร" value={purpose} onChange={setPurpose} options={Purpose} /></div>
-                    <div className="flex flex-wrap -mx-3">
-                        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0"><SelectGroup label="โทนและรูปแบบภาษา" value={tone} onChange={setTone} options={Tone} /></div>
-                        <div className="w-full md:w-1/2 px-3"><SelectGroup label="ช่องทางการสื่อสาร" value={format} onChange={setFormat} options={Format} /></div>
-                    </div>
-                    <button type="submit" disabled={isLoading} className={`w-full py-3 rounded-xl text-white font-bold transition duration-300 ease-in-out flex justify-center items-center ${isLoading ? 'bg-secondary-blue/70 cursor-not-allowed' : 'bg-primary-blue hover:bg-secondary-blue shadow-md'}`}>
-                        {isLoading ? (
-                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                        ) : ('สร้างแนวทางการสื่อสาร ✨')}
-                    </button>
-                </form>
-            );
-        };
-
-        const ResultCard = ({ result }) => { 
-            if (!result) return null;
-            const renderContent = (title, content) => (
-                <div className="mb-6">
-                    <h3 className="text-lg font-bold text-secondary-blue border-b-2 border-accent-sky pb-1 mb-2">{title}</h3>
-                    <div className="whitespace-pre-line text-gray-800">{content}</div>
-                </div>
-            );
-            return (
-                <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mt-8">
-                    <h2 className="text-2xl font-extrabold text-primary-blue mb-6">💡 แนวทางการสื่อสารที่แนะนำ</h2>
-                    {renderContent("แนวคิด/หลักการ (Strategy)", result.strategy)}
-                    {renderContent("คำพูด/ข้อความ (Script)", result.script)}
-                    {renderContent("ตัวอย่างการสนทนา (Example)", result.example)}
-                    <div className="mb-0">
-                        <h3 className="text-lg font-bold text-secondary-blue border-b-2 border-accent-sky pb-1 mb-2">เคล็ดลับการสื่อสาร (Tips)</h3>
-                        <ul className="list-disc list-inside space-y-1 text-gray-800">
-                            {result.tips.map((tip, index) => (<li key={index}>{tip}</li>))}
-                        </ul>
-                    </div>
-                </div>
-            );
-        };
-
-        // Main App Component
-        const App = () => {
-            const [result, setResult] = useState(null);
-            const [isLoading, setIsLoading] = useState(false);
-            const [error, setError] = useState(null);
-
-            const handleGenerate = useCallback(async (params) => {
-                setIsLoading(true);
-                setError(null);
-                setResult(null);
-
-                try {
-                    // ใช้งานฟังก์ชัน Demo
-                    const guide = await generateCommunicationGuide(params.sender, params.receiver, params.purpose, params.tone, params.format);
-                    setResult(guide);
-                } catch (err) {
-                    setError("เกิดข้อผิดพลาดภายในโหมดสาธิต: " + err.message);
-                } finally {
-                    setIsLoading(false);
-                }
-            }, []);
-
-            return (
-                <div className="min-h-screen bg-white-bg p-4 md:p-8">
-                    <div className="max-w-4xl mx-auto">
-                        
-                        <header className="text-center py-8 mb-8">
-                            <h1 className="text-4xl md:text-5xl font-extrabold text-primary-blue mb-2">Better Conversations, Better Culture</h1>
-                            <h2 className="text-xl md:text-2xl font-semibold text-secondary-blue mb-4">สื่อสารให้ดี วัฒนธรรมองค์กรจะดีขึ้น</h2>
-                            <p className="text-gray-600 font-bold text-lg p-2 bg-yellow-100 rounded-lg">
-                                📣 โหมดสาธิต (DEMO MODE): โค้ดนี้ใช้งานได้ทันที 📣
-                            </p>
-                            <p className="text-gray-600 text-sm italic mt-2">Tagline: A supportive space for ideas and voices.</p>
-                            <div className="mt-4 p-4 bg-accent-sky/20 rounded-lg text-primary-blue border-l-4 border-primary-blue">พื้นที่ที่ช่วยให้ผู้นำและทีมพูดคุยกันอย่างสร้างสรรค์ นำไปสู่วัฒนธรรมที่เข้มแข็งในโรงเรียนของคุณ</div>
-                        </header>
-
-                        <main>
-                            <InputForm onGenerate={handleGenerate} isLoading={isLoading} />
-                            
-                            {error && (
-                                <div className="mt-8 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg" role="alert">
-                                    <p className="font-bold">เกิดข้อผิดพลาด 🚨</p>
-                                    <p>{error}</p>
-                                </div>
-                            )}
-
-                            {result && <ResultCard result={result} />}
-                        </main>
-                        
-                        <footer className="mt-10 p-4 border-t border-gray-300 text-center text-sm text-gray-500">
-                             **หมายเหตุ:** หากคุณต้องการผลลัพธ์ที่ปรับเปลี่ยนตามตัวเลือกที่เลือก (ใช้งาน AI เต็มรูปแบบ) คุณจะต้องไปสร้าง **Gemini API Key** ของคุณและนำไปวางแทนที่ฟังก์ชัน `generateCommunicationGuide` ในโค้ดนี้
-                        </footer>
-                    </div>
-                </div>
-            );
-        };
-
-        // App Entry Point
-        const container = document.getElementById('root');
-        if (container) {
-            const root = ReactDOM.createRoot(container);
-            root.render(<App />);
+    <script>
+        // State
+        let apiKey = localStorage.getItem('gemini_api_key') || '';
+        let isExpanded = true;
+        
+        // Show change key button if key exists
+        if (apiKey) {
+            document.getElementById('changeKeyBtn').classList.remove('hidden');
         }
+        
+        // API Modal Functions
+        function showApiModal() {
+            document.getElementById('apiKeyModal').classList.remove('hidden');
+            document.getElementById('apiKeyInput').value = apiKey;
+            document.getElementById('saveKeyCheckbox').checked = !!apiKey;
+        }
+        
+        function closeApiModal() {
+            document.getElementById('apiKeyModal').classList.add('hidden');
+        }
+        
+        function submitApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            const save = document.getElementById('saveKeyCheckbox').checked;
+            
+            if (key) {
+                apiKey = key;
+                if (save) {
+                    localStorage.setItem('gemini_api_key', key);
+                } else {
+                    localStorage.removeItem('gemini_api_key');
+                }
+                document.getElementById('changeKeyBtn').classList.remove('hidden');
+                closeApiModal();
+            }
+        }
+        
+        // Copy Function
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.innerText = '✓ คัดลอกแล้ว!';
+                btn.classList.remove('bg-blue-50', 'text-blue-600');
+                btn.classList.add('bg-green-100', 'text-green-700');
+                setTimeout(() => {
+                    btn.innerText = '📋 คัดลอก';
+                    btn.classList.remove('bg-green-100', 'text-green-700');
+                    btn.classList.add('bg-blue-50', 'text-blue-600');
+                }, 2000);
+            });
+        }
+        
+        // Toggle Result
+        function toggleResult() {
+            isExpanded = !isExpanded;
+            const content = document.getElementById('resultContent');
+            const btn = document.getElementById('toggleBtn');
+            
+            if (isExpanded) {
+                content.classList.remove('hidden');
+                btn.innerText = 'ย่อ ▲';
+            } else {
+                content.classList.add('hidden');
+                btn.innerText = 'ขยาย ▼';
+            }
+        }
+        
+        // Show/Hide Loading
+        function setLoading(loading) {
+            const btn = document.getElementById('generateBtn');
+            if (loading) {
+                btn.disabled = true;
+                btn.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'hover:scale-[1.02]');
+                btn.classList.add('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+                btn.innerHTML = `
+                    <svg class="animate-spin h-6 w-6" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>กำลังสร้างแนวทาง...</span>
+                `;
+            } else {
+                btn.disabled = false;
+                btn.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'hover:scale-[1.02]');
+                btn.classList.remove('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+                btn.innerHTML = `
+                    <span>สร้างแนวทางการสื่อสาร</span>
+                    <span class="text-xl">✨</span>
+                `;
+            }
+        }
+        
+        // Show Error
+        function showError(message) {
+            document.getElementById('errorMessage').innerText = message;
+            document.getElementById('errorBox').classList.remove('hidden');
+        }
+        
+        // Hide Error
+        function hideError() {
+            document.getElementById('errorBox').classList.add('hidden');
+        }
+        
+        // Display Result
+        function displayResult(result) {
+            document.getElementById('strategyText').innerText = result.strategy || '';
+            document.getElementById('scriptText').innerText = result.script || '';
+            document.getElementById('exampleText').innerText = result.example || '';
+            
+            // Tips
+            const tipsList = document.getElementById('tipsList');
+            tipsList.innerHTML = '';
+            (result.tips || []).forEach((tip, index) => {
+                tipsList.innerHTML += `
+                    <li class="flex items-start gap-2 text-slate-700">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">${index + 1}</span>
+                        <span class="text-sm">${tip}</span>
+                    </li>
+                `;
+            });
+            
+            // Donts
+            const dontsList = document.getElementById('dontsList');
+            dontsList.innerHTML = '';
+            (result.donts || []).forEach((dont) => {
+                dontsList.innerHTML += `
+                    <li class="flex items-start gap-2 text-slate-700">
+                        <span class="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">✕</span>
+                        <span class="text-sm">${dont}</span>
+                    </li>
+                `;
+            });
+            
+            document.getElementById('resultCard').classList.remove('hidden');
+            isExpanded = true;
+            document.getElementById('resultContent').classList.remove('hidden');
+            document.getElementById('toggleBtn').innerText = 'ย่อ ▲';
+        }
+        
+        // Generate Communication Guide
+        async function handleGenerate() {
+            if (!apiKey) {
+                showApiModal();
+                return;
+            }
+            
+            hideError();
+            setLoading(true);
+            document.getElementById('resultCard').classList.add('hidden');
+            
+            const sender = document.getElementById('sender').value;
+            const receiver = document.getElementById('receiver').value;
+            const purpose = document.getElementById('purpose').value;
+            const tone = document.getElementById('tone').value;
+            const format = document.getElementById('format').value;
+            const topic = document.getElementById('topic').value;
+            
+            const isSpeech = purpose.includes('กล่าวเปิดงาน') || purpose.includes('กล่าวปิดงาน');
+            
+            const prompt = `คุณคือโค้ชด้านการสื่อสารมืออาชีพสำหรับสถาบันการศึกษาในประเทศไทย สร้างแนวทางการสื่อสารที่เป็นธรรมชาติ เหมาะสมกับวัฒนธรรมไทย และใช้งานได้จริง
+
+โจทย์:
+- ผู้ส่ง: ${sender}
+- ผู้รับ: ${receiver}
+- วัตถุประสงค์: ${purpose}
+- โทนภาษา: ${tone}
+- ช่องทาง: ${format}
+- เรื่องที่ต้องการสื่อสาร: ${topic || 'ไม่ระบุ (กรุณาสร้างตัวอย่างทั่วไป)'}
+
+${purpose.includes('กล่าวเปิดงาน') ? 'นี่คือการกล่าวเปิดงาน กรุณาสร้างสคริปต์กล่าวเปิดงานที่สมบูรณ์ มีการต้อนรับ แนะนำงาน และเปิดงานอย่างเป็นทางการ' : ''}
+${purpose.includes('กล่าวปิดงาน') ? 'นี่คือการกล่าวปิดงาน กรุณาสร้างสคริปต์กล่าวปิดงานที่สมบูรณ์ มีการสรุป ขอบคุณ และกล่าวปิดอย่างประทับใจ' : ''}
+
+ตอบเป็น JSON เท่านั้น ไม่ต้องมีข้อความอื่น:
+{
+  "strategy": "แนวคิดหลักการสื่อสาร 2-3 ประโยค",
+  "script": "คำพูด/ข้อความที่แนะนำ ${isSpeech ? '(สคริปต์เต็มสำหรับกล่าว ความยาวประมาณ 1-2 นาที)' : '3-5 ประโยค'} เขียนเหมือนพูดจริง ใส่อิโมจิเล็กน้อย",
+  "example": "ตัวอย่างบทสนทนาจำลอง แสดงทั้งคำพูดและการตอบกลับ หรือตัวอย่างสถานการณ์",
+  "tips": ["เคล็ดลับ 1", "เคล็ดลับ 2", "เคล็ดลับ 3"],
+  "donts": ["สิ่งที่ไม่ควรทำ 1", "สิ่งที่ไม่ควรทำ 2"]
+}`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{ 
+                            role: "user", 
+                            parts: [{ text: prompt }] 
+                        }],
+                        generationConfig: {
+                            temperature: 0.8,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 2048,
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.json();
+                    throw new Error(errorBody.error?.message || `API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+                    let jsonString = data.candidates[0].content.parts[0].text;
+                    jsonString = jsonString.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+                    const result = JSON.parse(jsonString);
+                    displayResult(result);
+                } else {
+                    throw new Error('ไม่สามารถอ่านผลลัพธ์จาก API ได้');
+                }
+            } catch (error) {
+                console.error('Generate error:', error);
+                if (error.message.includes('API key')) {
+                    showError('API Key ไม่ถูกต้อง กรุณาตรวจสอบและลองใหม่อีกครั้ง');
+                    apiKey = '';
+                    localStorage.removeItem('gemini_api_key');
+                } else {
+                    showError(error.message || 'เกิดข้อผิดพลาดในการสร้างแนวทาง');
+                }
+            } finally {
+                setLoading(false);
+            }
+        }
+        
+        // Update placeholder based on purpose
+        document.getElementById('purpose').addEventListener('change', function() {
+            const isSpeech = this.value.includes('กล่าวเปิดงาน') || this.value.includes('กล่าวปิดงาน');
+            document.getElementById('topic').placeholder = isSpeech 
+                ? "เช่น งานวันวิทยาศาสตร์, พิธีมอบประกาศนียบัตร, กิจกรรมวันแม่..." 
+                : "เช่น นักเรียนมาสาย, การบ้านไม่ส่ง, ขอเลื่อนประชุม, ขอบคุณที่ช่วยงาน...";
+        });
     </script>
 </body>
 </html>
